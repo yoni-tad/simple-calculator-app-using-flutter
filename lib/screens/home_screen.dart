@@ -198,7 +198,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                     () => buttonPressed('3')),
                               ],
                             ),
-                            const SizedBox(height: 10),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
