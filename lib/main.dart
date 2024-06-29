@@ -1,8 +1,15 @@
+import 'package:day_one/provider/theme_provider.dart';
 import 'package:day_one/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,10 +20,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Day One Calculator',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.orange
-      ),
-      home: HomeScreen(),
+      theme: Provider.of<ThemeProvider>(context).themeDataStyle,
+      home: const HomeScreen(),
     );
   }
 }

@@ -7,12 +7,12 @@ Widget calcButton(
 ) {
   return Padding(
     padding: const EdgeInsets.symmetric(
-      horizontal: 2,
-      vertical: 3,
+      horizontal: 3,
+      vertical: 4,
     ),
     child: Container(
-      width: 75,
-      height: btnText == '=' ? 150 : 70,
+      width: 72,
+      height: btnText == '=' ? 140 : 65,
       padding: const EdgeInsets.all(0),
       child: ElevatedButton(
         onPressed: buttonPressed,
@@ -28,7 +28,7 @@ Widget calcButton(
           btnText,
           textAlign: TextAlign.center,
           style: const TextStyle(
-            fontSize: 20,
+            fontSize: 18,
             color: Colors.white,
           ),
         ),

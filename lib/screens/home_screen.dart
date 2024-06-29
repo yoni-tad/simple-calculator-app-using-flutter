@@ -1,9 +1,10 @@
-import 'dart:ffi';
-
 import 'package:day_one/constants/colors.dart';
+import 'package:day_one/provider/theme_provider.dart';
 import 'package:day_one/widgets/calcButton.dart';
+import 'package:day_one/widgets/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -75,6 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
       backgroundColor: AppColors.darkColor,
       appBar: AppBar(
@@ -83,9 +86,17 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Icon(
-              Icons.settings,
-              color: AppColors.primaryColor,
+            child: InkWell(
+              onTap: (){
+                setState(() {
+                  themeProvider.changeTheme();
+                });
+              },
+              child: Icon(
+                // Icons.dark_mode_outlined,
+                themeProvider.themeDataStyle == ThemeDataStyle.dark ? Icons.dark_mode_outlined : Icons.light_mode_outlined,
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
           ),
         ],
@@ -96,12 +107,12 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Align(
               alignment: Alignment.center,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Padding(
@@ -118,7 +129,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(width: 10),
                       ],
                     ),
-                    Row(
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Padding(
@@ -144,79 +158,79 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(width: 20),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,                      
-                      children: [
-                        calcButton(
-                            'AC', Colors.white24, () => buttonPressed('AC')),
-                        calcButton(
-                            '%', Colors.white24, () => buttonPressed('%')),
-                        calcButton(
-                            '÷', Colors.white24, () => buttonPressed('÷')),
-                        calcButton(
-                            '×', Colors.white24, () => buttonPressed('×')),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        calcButton(
-                            '7', Colors.white24, () => buttonPressed('7')),
-                        calcButton(
-                            '8', Colors.white24, () => buttonPressed('8')),
-                        calcButton(
-                            '9', Colors.white24, () => buttonPressed('9')),
-                        calcButton(
-                            '-', Colors.white24, () => buttonPressed('-')),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        calcButton(
-                            '4', Colors.white24, () => buttonPressed('4')),
-                        calcButton(
-                            '5', Colors.white24, () => buttonPressed('5')),
-                        calcButton(
-                            '6', Colors.white24, () => buttonPressed('6')),
-                        calcButton(
-                            '+', Colors.white24, () => buttonPressed('+')),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column(
-                          children: [
-                            Row(
-                              children: [
-                                calcButton('1', Colors.white24,
-                                    () => buttonPressed('1')),
-                                calcButton('2', Colors.white24,
-                                    () => buttonPressed('2')),
-                                calcButton('3', Colors.white24,
-                                    () => buttonPressed('3')),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                calcButton('+/-', Colors.white24,
-                                    () => buttonPressed('+/-')),
-                                calcButton('0', Colors.white24,
-                                    () => buttonPressed('0')),
-                                calcButton('.', Colors.white24,
-                                    () => buttonPressed('.')),
-                              ],
-                            ),
-                          ],
-                        ),
-                        calcButton(
-                            '=', AppColors.primaryColor, () => buttonPressed('=')),
-                      ],
-                    ),
-                  ],
-                ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,                      
+                    children: [
+                      calcButton(
+                          'AC', Colors.white24, () => buttonPressed('AC')),
+                      calcButton(
+                          '%', Colors.white24, () => buttonPressed('%')),
+                      calcButton(
+                          '÷', Colors.white24, () => buttonPressed('÷')),
+                      calcButton(
+                          '×', Colors.white24, () => buttonPressed('×')),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      calcButton(
+                          '7', Colors.white24, () => buttonPressed('7')),
+                      calcButton(
+                          '8', Colors.white24, () => buttonPressed('8')),
+                      calcButton(
+                          '9', Colors.white24, () => buttonPressed('9')),
+                      calcButton(
+                          '-', Colors.white24, () => buttonPressed('-')),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      calcButton(
+                          '4', Colors.white24, () => buttonPressed('4')),
+                      calcButton(
+                          '5', Colors.white24, () => buttonPressed('5')),
+                      calcButton(
+                          '6', Colors.white24, () => buttonPressed('6')),
+                      calcButton(
+                          '+', Colors.white24, () => buttonPressed('+')),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        children: [
+                          Row(
+                            children: [
+                              calcButton('1', Colors.white24,
+                                  () => buttonPressed('1')),
+                              calcButton('2', Colors.white24,
+                                  () => buttonPressed('2')),
+                              calcButton('3', Colors.white24,
+                                  () => buttonPressed('3')),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              calcButton('+/-', Colors.white24,
+                                  () => buttonPressed('+/-')),
+                              calcButton('0', Colors.white24,
+                                  () => buttonPressed('0')),
+                              calcButton('.', Colors.white24,
+                                  () => buttonPressed('.')),
+                            ],
+                          ),
+                        ],
+                      ),
+                      calcButton(
+                          '=', Theme.of(context).colorScheme.primary, () => buttonPressed('=')),
+                    ],
+                  ),
+                ],
               ),
             )
           ],
